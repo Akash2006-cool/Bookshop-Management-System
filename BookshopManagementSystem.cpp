@@ -1,23 +1,23 @@
+#include <unistd.h>
+
 #include <climits>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
-#include <unistd.h>
 
 class Bookshop {
-   public:
-   int BookID; // Total Number of Copies
-   char BookName[100]; // Name of book
-   char BookAuthor[100]; // Author of boo
-   void GetBookData(); // Get Data about book from user
-   void DisplayAllBooks(); // Display data of all books
-   int NextBookID(); // Return next book ID
+  public:
+   int BookID;              // Total Number of Copies
+   char BookName[100];      // Name of book
+   char BookAuthor[100];    // Author of boo
+   void GetBookData();      // Get Data about book from user
+   void DisplayAllBooks();  // Display data of all books
+   int NextBookID();        // Return next book ID
    int NoCopies;
    int BookPrice;
 };
 
-void Bookshop::GetBookData()
-{
+void Bookshop::GetBookData() {
    std::cout << "\n\tBook ID               ";
    std::cin >> BookID;
    std::cout << "\tName of Book          ";
@@ -31,8 +31,7 @@ void Bookshop::GetBookData()
    std::cin >> BookPrice;
 }
 
-void Bookshop::DisplayAllBooks()
-{
+void Bookshop::DisplayAllBooks() {
    std::cout << "\n\tBook ID               " << BookID;
    std::cout << "\n\tName Of book          " << BookName;
    std::cout << "\n\tAuthor of Book        " << BookAuthor;
@@ -44,7 +43,7 @@ void Bookshop::DisplayAllBooks()
 int Bookshop::NextBookID() { return BookID; }
 
 class Customer {
-   public:
+  public:
    int CustomerID;
    int CopiesTaken;
    char CustomerName[200];
@@ -55,8 +54,7 @@ class Customer {
    int NextCustomerID();
 };
 
-void Customer::GetCustomerData()
-{
+void Customer::GetCustomerData() {
    std::cout << "\n\tCustomer ID                ";
    std::cin >> CustomerID;
    std::cout << "\tName of Customer           ";
@@ -71,8 +69,7 @@ void Customer::GetCustomerData()
    std::cin >> CopiesTaken;
 }
 
-void Customer::DisplayCustomerData()
-{
+void Customer::DisplayCustomerData() {
    std::cout << "\n\tCustomer ID                          " << CustomerID;
    std::cout << "\n\tName of User                         " << CustomerName;
    std::cout << "\n\tID of Book taken                     " << BookIDTaken;
@@ -84,7 +81,7 @@ void Customer::DisplayCustomerData()
 int Customer::NextCustomerID() { return CustomerID; }
 
 class Customer_MW {
-   public:
+  public:
    int CustomerID;
    int CopiesTaken;
    char CustomerName[200];
@@ -93,8 +90,7 @@ class Customer_MW {
    void GetCustomerData_MW();
 };
 
-void Customer_MW::GetCustomerData_MW()
-{
+void Customer_MW::GetCustomerData_MW() {
    std::cout << "\n\tCustomer ID                ";
    std::cin >> CustomerID;
    std::cout << "\tName of Customer           ";
@@ -139,8 +135,7 @@ void Close();
 void InstructionsWindow();
 //-----------------------------------------------------------------------------
 
-void Menu()
-{
+void Menu() {
    system("clear");
    std::string Confirmation;
    int CodeEntry;
@@ -168,106 +163,105 @@ void Menu()
    std::cin >> CodeEntry;
 
    switch (CodeEntry) {
-   case 1:
-      AddCustomer();
-      Ignore();
-      Menu();
-      break;
-   case 2:
-      system("clear");
-      CustomerDatabase();
-      std::cout << "\t\tDELETE A CUSTOMER DATA\n";
-      std::cout << "Enter User ID                       ";
-      std::cin >> CustomerID;
-      DeleteCustomerData(CustomerID);
-      break;
-   case 3:
-      system("clear");
-      CustomerDatabase();
-      std::cout << "\t\tEDIT DATA OF CUSTOMER\n";
-      std::cout << "Enter Customer ID                   ";
-      std::cin >> CustomerID;
-      ModifyCustomerData(CustomerID);
-      break;
-   case 4:
-      system("clear");
-      DisplayAllCustomersInDataBase();
-      break;
-   case 5:
-      system("clear");
-      CustomerDatabase();
-      std::cout << "\n\nSEARCH FOR A CUSTOMER\n";
-      std::cout << "Enter customer ID                   ";
-      std::cin >> CustomerID;
-      CustomerFinder(CustomerID);
-      break;
-   case 6:
-      system("clear");
-      BookDataBase();
-      AddBook();
-      Menu();
-      break;
-   case 7:
-      system("clear");
-      DisplayAllBooks();
-      Ignore();
-      Menu();
-      break;
-   case 8:
-      system("clear");
-      BookDataBase();
-      std::cout << "\t\tSEARCH A BOOK\n";
-      std::cout << "Enter BookID                        ";
-      std::cin >> BookID;
-      BookFinder(BookID);
-      Menu();
-      break;
-   case 9:
-      system("clear");
-      BookDataBase();
-      std::cout << "\t\tDELETE A BOOK DATA";
-      std::cout << "Enter BookID      ";
-      std::cin >> BookID;
-      std::cout << "Are you sure want to remove data of Book ID '" << BookID << "'[y/n]     ";
-      std::cin >> Confirmation;
-      if (Confirmation == "Y" || Confirmation == "y") {
-         DeleteBook(BookID);
-      } else {
-         std::cout << "Information[011111]   : Confirmation cancelled\n";
+      case 1:
+         AddCustomer();
          Ignore();
          Menu();
-      }
-      break;
-   case 10:
-      system("clear");
-      BookDataBase();
-      std::cout << "\t\tMODIFY A BOOK DATA";
-      std::cout << "\n\nEnter Book ID                   ";
-      std::cin >> BookID;
-      ModifyBook(BookID);
-      break;
-   case 11:
-      system("clear");
-      BookDataBase();
-      std::cout << "\n\nEnter Book ID                   ";
-      std::cin >> BookID;
-      std::cout << "Number of copies to add         ";
-      std::cin >> NumberOfCopies;
-      AddNewCopiesInStore(NumberOfCopies, BookID);
-      break;
-   case 12:
-      system("clear");
-      Close();
-      break;
-   default:
-      std::cout << "Error[1000] : No such type of option in menu !";
-      Ignore();
-      Menu();
+         break;
+      case 2:
+         system("clear");
+         CustomerDatabase();
+         std::cout << "\t\tDELETE A CUSTOMER DATA\n";
+         std::cout << "Enter User ID                       ";
+         std::cin >> CustomerID;
+         DeleteCustomerData(CustomerID);
+         break;
+      case 3:
+         system("clear");
+         CustomerDatabase();
+         std::cout << "\t\tEDIT DATA OF CUSTOMER\n";
+         std::cout << "Enter Customer ID                   ";
+         std::cin >> CustomerID;
+         ModifyCustomerData(CustomerID);
+         break;
+      case 4:
+         system("clear");
+         DisplayAllCustomersInDataBase();
+         break;
+      case 5:
+         system("clear");
+         CustomerDatabase();
+         std::cout << "\n\nSEARCH FOR A CUSTOMER\n";
+         std::cout << "Enter customer ID                   ";
+         std::cin >> CustomerID;
+         CustomerFinder(CustomerID);
+         break;
+      case 6:
+         system("clear");
+         BookDataBase();
+         AddBook();
+         Menu();
+         break;
+      case 7:
+         system("clear");
+         DisplayAllBooks();
+         Ignore();
+         Menu();
+         break;
+      case 8:
+         system("clear");
+         BookDataBase();
+         std::cout << "\t\tSEARCH A BOOK\n";
+         std::cout << "Enter BookID                        ";
+         std::cin >> BookID;
+         BookFinder(BookID);
+         Menu();
+         break;
+      case 9:
+         system("clear");
+         BookDataBase();
+         std::cout << "\t\tDELETE A BOOK DATA";
+         std::cout << "Enter BookID      ";
+         std::cin >> BookID;
+         std::cout << "Are you sure want to remove data of Book ID '" << BookID << "'[y/n]     ";
+         std::cin >> Confirmation;
+         if (Confirmation == "Y" || Confirmation == "y") {
+            DeleteBook(BookID);
+         } else {
+            std::cout << "Information[011111]   : Confirmation cancelled\n";
+            Ignore();
+            Menu();
+         }
+         break;
+      case 10:
+         system("clear");
+         BookDataBase();
+         std::cout << "\t\tMODIFY A BOOK DATA";
+         std::cout << "\n\nEnter Book ID                   ";
+         std::cin >> BookID;
+         ModifyBook(BookID);
+         break;
+      case 11:
+         system("clear");
+         BookDataBase();
+         std::cout << "\n\nEnter Book ID                   ";
+         std::cin >> BookID;
+         std::cout << "Number of copies to add         ";
+         std::cin >> NumberOfCopies;
+         AddNewCopiesInStore(NumberOfCopies, BookID);
+         break;
+      case 12:
+         system("clear");
+         Close();
+         break;
+      default:
+         std::cout << "Error[1000] : No such type of option in menu !";
+         Ignore();
+         Menu();
    }
 }
 
-int main() 
-{
+int main() {
    system("clear");
    InstructionsWindow();
    std::cout << "\n\n";
@@ -276,8 +270,7 @@ int main()
 }
 
 //----------------------------------------------     Brain      --------------------------------------------------------------------
-void BooknameByID(int BookID)
-{
+void BooknameByID(int BookID) {
    std::ifstream DataFile;
    DataFile.open("BookDataBase.dat", std::ios::binary);
    Bookshop bookshop;
@@ -288,15 +281,13 @@ void BooknameByID(int BookID)
    }
 }
 
-void Ignore()
-{
+void Ignore() {
    std::cout << "\nHit 'Enter' to continue ...";
    std::cin.ignore();
    std::cin.get();
 }
 
-void AddBook()
-{
+void AddBook() {
    Bookshop bookshop;
    std::ofstream DataFile;
    DataFile.open("BookDataBase.dat", std::ios::binary | std::ios::app);
@@ -311,8 +302,7 @@ void AddBook()
    DataFile.close();
 }
 
-void CustomerDataEntry_ModificationWin(int BookID_customer, int CopiesTaken_customer)
-{
+void CustomerDataEntry_ModificationWin(int BookID_customer, int CopiesTaken_customer) {
    Customer_MW customer_mw;
    Customer customer;
    std::ofstream file;
@@ -331,8 +321,7 @@ void CustomerDataEntry_ModificationWin(int BookID_customer, int CopiesTaken_cust
    file.close();
 }
 
-void DisplayAllBooks()
-{
+void DisplayAllBooks() {
    Bookshop bookshop;
    std::ifstream f;
    f.open("BookDataBase.dat", std::ios::binary);
@@ -355,8 +344,7 @@ void DisplayAllBooks()
    f.close();
 }
 
-void DisplayAllCustomersInDataBase()
-{
+void DisplayAllCustomersInDataBase() {
    std::ifstream DataFile1;
    DataFile1.open("CustomerDataBase.dat", std::ios::binary);
    Customer customer;
@@ -381,8 +369,7 @@ void DisplayAllCustomersInDataBase()
    Menu();
 }
 
-void BookFinder(int BookID)
-{
+void BookFinder(int BookID) {
    Bookshop bookshop;
    std::ifstream DataFile;
    DataFile.open("BookDataBase.dat");
@@ -407,8 +394,7 @@ void BookFinder(int BookID)
    }
 }
 
-void CustomerFinder(int CustomerID)
-{
+void CustomerFinder(int CustomerID) {
    Customer customer;
    std::ifstream DataFile;
    DataFile.open("CustomerDataBase.dat");
@@ -434,8 +420,7 @@ void CustomerFinder(int CustomerID)
    }
 }
 
-void DeleteBook(int BookID)
-{
+void DeleteBook(int BookID) {
    Bookshop bookshop;
    std::ifstream inFile;
    inFile.open("BookDataBase.dat", std::ios::binary);
@@ -464,8 +449,7 @@ void DeleteBook(int BookID)
    Menu();
 }
 
-void ModifyBook(int BookID)
-{
+void ModifyBook(int BookID) {
    std::string Confirmation;
    Bookshop bookshop;
    std::ifstream DataFile;
@@ -524,8 +508,7 @@ void ModifyBook(int BookID)
    }
 }
 
-void ModifyCustomerData(int CustomerID)
-{
+void ModifyCustomerData(int CustomerID) {
    Customer customer;
    Customer_MW customer1;
    std::ifstream in;
@@ -581,8 +564,7 @@ void ModifyCustomerData(int CustomerID)
    }
 }
 
-void DecreaseCopiesInStore(int CopiesTaken, int BookIDTakingByUser)
-{
+void DecreaseCopiesInStore(int CopiesTaken, int BookIDTakingByUser) {
    Bookshop bookshop;
    std::ifstream In;
    In.open("BookDataBase.dat", std::ios::binary);
@@ -604,8 +586,7 @@ void DecreaseCopiesInStore(int CopiesTaken, int BookIDTakingByUser)
    rename("Temporary_BookDataBase.dat", "BookDataBase.dat");
 }
 
-bool isBookExistsInBookshop(int BookID)
-{
+bool isBookExistsInBookshop(int BookID) {
    Bookshop bookshop;
    std::ifstream DataFile;
    DataFile.open("BookDataBase.dat", std::ios::binary);
@@ -616,8 +597,7 @@ bool isBookExistsInBookshop(int BookID)
    }
 }
 
-int TotalCopiesInStore(int BookID)
-{
+int TotalCopiesInStore(int BookID) {
    Bookshop bookshop;
    std::ifstream DataFile;
    DataFile.open("BookDataBase.dat");
@@ -630,8 +610,7 @@ int TotalCopiesInStore(int BookID)
    }
 }
 
-void AddNewCopiesInStore(int NewCopies, int BookID)
-{
+void AddNewCopiesInStore(int NewCopies, int BookID) {
    Bookshop bookshop;
    std::ifstream In;
    In.open("BookDataBase.dat", std::ios::binary);
@@ -655,21 +634,18 @@ void AddNewCopiesInStore(int NewCopies, int BookID)
    Menu();
 }
 
-bool IsCustomerIDAvailable(int CustomerID)
-{
+bool IsCustomerIDAvailable(int CustomerID) {
    Customer customer;
    std::ifstream DataFile;
    DataFile.open("CustomerDataBase.dat");
    while (DataFile.read(reinterpret_cast<char*>(&customer), sizeof(Customer))) {
       if (customer.NextCustomerID() == CustomerID) {
-
          return false;
       }
    }
 }
 
-bool CustomerIDAvailable(int ID)
-{
+bool CustomerIDAvailable(int ID) {
    std::ifstream DataFile;
    DataFile.open("CustomerDataBase.dat");
    Customer customer;
@@ -681,8 +657,7 @@ bool CustomerIDAvailable(int ID)
    }
 }
 
-void CustomerDatabase()
-{
+void CustomerDatabase() {
    std::ifstream DataFile1;
    DataFile1.open("CustomerDataBase.dat", std::ios::binary);
    Customer customer;
@@ -704,8 +679,7 @@ void CustomerDatabase()
    std::cout << "|_______________________________________________________________________________________________________________________|\n\n";
 }
 
-void BookDataBase()
-{
+void BookDataBase() {
    Bookshop bookshop;
    std::ifstream f;
    f.open("BookDataBase.dat", std::ios::binary);
@@ -728,8 +702,7 @@ void BookDataBase()
    f.close();
 }
 
-void AddCustomer()
-{
+void AddCustomer() {
    system("clear");
    std::ofstream DataFile;
    DataFile.open("CustomerDataBase.dat", std::ios::binary | std::ios::app);
@@ -768,8 +741,7 @@ void AddCustomer()
    }
 }
 
-void DeleteCustomerData(int CustomerID)
-{
+void DeleteCustomerData(int CustomerID) {
    std::ifstream in;
    std::ofstream out;
    in.open("CustomerDataBase.dat");
@@ -795,8 +767,7 @@ void DeleteCustomerData(int CustomerID)
    Menu();
 }
 
-void Close()
-{
+void Close() {
    system("clear");
    std::string _EXIT_;
    std::cout << "Are you sure want to exit[y/n]        ";
@@ -815,8 +786,7 @@ void Close()
       Menu();
    }
 }
-void InstructionsWindow()
-{
+void InstructionsWindow() {
    std::cout << "\n\t\t\tINSTRUCTIONS FOR DATA ENTRY\n\n\n";
    std::cout << "\t1.  Book ID or Customer ID should be an integer .\n\n"
              << "\t2.  Use format '+91 xxxxx xxxxx' for contact Number .\n\n"
@@ -828,7 +798,5 @@ void InstructionsWindow()
              << "\t7.  Don't remove files named as 'CustomerDataBase.dat' and 'BookDataBase.dat' \n"
              << "\t     else your all data will be removed permanently.\n\n\n"
              << "\nHave a nice day 🙂️ !\n\n";
-             
-   
 }
 //------------------------------------------------------------------------------------------------------------------------------------------
