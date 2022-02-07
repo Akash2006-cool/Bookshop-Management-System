@@ -15,6 +15,7 @@ class Bookshop {
    int NextBookID();        // Return next book ID
    int NoCopies;
    int BookPrice;
+   int NextBookPrice();
 };
 
 void Bookshop::GetBookData() {
@@ -41,6 +42,7 @@ void Bookshop::DisplayAllBooks() {
 }
 
 int Bookshop::NextBookID() { return BookID; }
+int Bookshop::NextBookPrice() { return BookPrice; }
 
 class Customer {
   public:
@@ -104,7 +106,7 @@ void Customer_MW::GetCustomerData_MW() {
 //-----------------------Functions for Book Management------------------------
 void AddBook();
 void DeleteBook(int BookID);
-void BookFinder(int BookID);
+void BookFinder();
 void ModifyBook(int BookID);
 void DisplayAllBooks();
 //----------------------------------------------------------------------------
@@ -133,6 +135,8 @@ void AddNewCopiesInStore(int BookID, int NumberOfCopies);
 bool BookExistsInBookshop(int BookID);
 void Close();
 void InstructionsWindow();
+void BookFinder_ID(int BookID);
+void BookFinder_Price(int MinPrice, int MaxPrice);
 //-----------------------------------------------------------------------------
 
 void Menu() {
@@ -210,12 +214,7 @@ void Menu() {
          break;
       case 8:
          system("clear");
-         BookDataBase();
-         std::cout << "\t\tSEARCH A BOOK\n";
-         std::cout << "Enter BookID                        ";
-         std::cin >> BookID;
-         BookFinder(BookID);
-         Menu();
+         BookFinder();
          break;
       case 9:
          system("clear");
@@ -369,7 +368,7 @@ void DisplayAllCustomersInDataBase() {
    Menu();
 }
 
-void BookFinder(int BookID) {
+void BookFinder_ID(int BookID) {
    Bookshop bookshop;
    std::ifstream DataFile;
    DataFile.open("BookDataBase.dat");
@@ -383,7 +382,6 @@ void BookFinder(int BookID) {
    while (DataFile.read(reinterpret_cast<char*>(&bookshop), sizeof(Bookshop))) {
       if (bookshop.NextBookID() == BookID) {
          bookshop.DisplayAllBooks();
-         Ignore();
          found = true;
       }
    }
@@ -391,6 +389,82 @@ void BookFinder(int BookID) {
    if (found == false) {
       std::cout << "DataBase Error[10111]   : No such type of Book exists in your database !";
       Ignore();
+   }
+   if (DataFile.is_open()) {
+      DataFile.close();
+   }
+   Ignore();
+   Menu();
+}
+
+void BookFinder_Price(int MinPrice, int MaxPrice) {
+   Bookshop bookshop;
+   std::ifstream DataFile;
+   DataFile.open("BookDataBase.dat");
+   bool status = false;
+   if (!DataFile) {
+      std::cout << "\nFile Error : File named as 'BookDataBase.dat' is missing from your system";
+      Ignore();
+      Menu();
+   }
+   DataFile.seekg(0, std::ios::beg);
+   while (DataFile.read(reinterpret_cast<char*>(&bookshop), sizeof(Bookshop))) {
+      if (bookshop.NextBookPrice() >= MinPrice && bookshop.NextBookPrice() <= MaxPrice) {
+         bookshop.DisplayAllBooks();
+         status = true;
+         std::cout << "\n----------------------------------------------------------------------\n";
+      }
+      if (DataFile.eof()) {
+         Ignore();
+         Menu();
+      } else {
+         continue;
+      }
+   }
+   DataFile.close();
+   if (status == false) {
+      std::cout << "\n\nNo book is between range of ₹" << MinPrice << " and ₹" << MaxPrice << " .";
+      Ignore();
+      Menu();
+   }
+   Ignore();
+   Menu();
+}
+void BookFinder() {
+   int Code;
+   int BookID;
+   int Max, Min;
+   std::cout << "\t\t+-------------------- Query Options ---------------------------+\n";
+   std::cout << "\t\t|                                                              |\n";
+   std::cout << "\t\t|            1.  Find Book Information with Book ID            |\n";
+   std::cout << "\t\t|            2.  Find Books between  price range               |\n";
+   std::cout << "\t\t|                                                              |\n";
+   std::cout << "\t\t+--------------------------------------------------------------+\n";
+   std::cout << "\n\n Code@Entry  ~$  ";
+   std::cin >> Code;
+   switch (Code) {
+      case 1:
+         system("clear");
+         BookDataBase();
+         std::cout << "\n\n\t\t\tFIND BOOK USING BOOK ID\n";
+         std::cout << "Enter Book ID              ";
+         std::cin >> BookID;
+         Ignore();
+         BookFinder_ID(BookID);
+         break;
+      case 2:
+         system("clear");
+         BookDataBase();
+         std::cout << "Minimum price of book should be    ";
+         std::cin >> Min;
+         std::cout << "\nMaximum price of book should be    ";
+         std::cin >> Max;
+         BookFinder_Price(Min, Max);
+         break;
+      default:
+         std::cout << "\n\nError : Code '" << Code << "' is not a option !";
+         Ignore();
+         BookFinder();
    }
 }
 
