@@ -4,6 +4,18 @@
 #include <iomanip>
 #include <iostream>
 
+/*
+         INFORMATION ABOUT PROJECT
+PROJECT NAME     : BOOKSHOP MANAGEMENT SYSTEM
+CREATED BY       : AKASH KUMAR
+LANGUAGE         : C++
+DATE OF CREATION : 01/02/2022
+PLATFORM         : LINUX, WINDOWS AND MAC(not tested) 
+TESTED ON        : UBUNTU 18.04 , KALI LINUX, RED HAT, WINDOWS 10
+ABOUT PROJECT    : Bookshop Management System is a application that helps to keep track of all the book and customer records .
+*/
+
+//----------------------------CLASS FOR SHOP---------------------------
 class Shop {
   public:
    char ShopName[200];
@@ -28,7 +40,9 @@ void Shop::GetShopDetails() {
    std::cout << "\t Address of Bookshop   ";
    std::cin.getline(Address, 200);
 }
+//---------------------------------------------------------------------------
 
+//-----------------------CLASS FOR BOOKSHOP------------------------------------
 class Bookshop {
   public:
    int BookID;              // Total Number of Copies
@@ -71,7 +85,9 @@ int Bookshop::NextBookID() {
 int Bookshop::NextBookPrice() {
    return BookPrice;
 }
+//---------------------------------------------------------------------------
 
+//---------------------------CLASS FOR CUSTOMER------------------------------
 class Customer {
   public:
    int CustomerID;
@@ -111,7 +127,9 @@ void Customer::DisplayCustomerData() {
 int Customer::NextCustomerID() { 
    return CustomerID; 
 }
+//---------------------------------------------------------------------------
 
+//--------------------------CLASS FOR SUCTOMER MODIFICATION WINDOW------------
 class Customer_MW {
   public:
    int CustomerID;
@@ -132,6 +150,7 @@ void Customer_MW::GetCustomerData_MW() {
    std::cin.ignore();
    std::cin.getline(ContactNumber, 100);
 }
+//---------------------------------------------------------------------------
 
 //-----------------------Functions for Book Management------------------------
 void AddBook();
@@ -171,8 +190,10 @@ void BookFinder_Price(int MinPrice, int MaxPrice);
 void Head();
 void AddShopInformation();
 bool isFileEmpty(std::ifstream& File);
-//-----------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------------------
 
+
+//--------------------------------------------------     Brain      ------------------------------------------------------------------------
 void Menu() {
    system("clear");
    std::string Confirmation;
@@ -311,8 +332,6 @@ void Menu() {
          Menu();
    }
 }
-
-//----------------------------------------------     Brain      --------------------------------------------------------------------
 
 void Profile() {
    Shop shop;
@@ -954,6 +973,7 @@ void AddShopInformation() {
 }
 //------------------------------------------------------------------------------------------------------------------------------------------
 
+//--------------------------------------------------DRIVER CODE------------------------------------------------------------------------------
 int main() {
    system("clear");
    InstructionsWindow();
@@ -977,3 +997,4 @@ int main() {
       Menu();
    }
 }
+//------------------------------------------------------------------------------------------------------------------------------------------
