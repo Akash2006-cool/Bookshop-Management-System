@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <stdlib.h>
 
 /*
          INFORMATION ABOUT PROJECT
@@ -12,7 +13,7 @@ LANGUAGE         : C++
 DATE OF CREATION : 01/02/2022
 PLATFORM         : LINUX, WINDOWS AND MAC(not tested) 
 TESTED ON        : UBUNTU 18.04 , KALI LINUX, RED HAT, WINDOWS 10
-ABOUT PROJECT    : Bookshop Management System is a powerful CLI application that helps to keep track of all the book and customer records .
+ABOUT PROJECT    : Bookshop Management System is a application that helps to keep track of all the book and customer records .
 */
 
 //----------------------------CLASS FOR SHOP---------------------------
@@ -936,7 +937,7 @@ void Close() {
    if (_EXIT_ == "y" || _EXIT_ == "Y") {
       sleep(3);
       system("clear");
-      return;
+      exit(0);
    } else if (_EXIT_ == "N" || _EXIT_ == "n") {
       std::cout << "Cancelled ....";
       Ignore();
