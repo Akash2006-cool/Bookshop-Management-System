@@ -12,7 +12,7 @@ LANGUAGE         : C++
 DATE OF CREATION : 01/02/2022
 PLATFORM         : LINUX, WINDOWS AND MAC(not tested) 
 TESTED ON        : UBUNTU 18.04 , KALI LINUX, RED HAT, WINDOWS 10
-ABOUT PROJECT    : Bookshop Management System is a application that helps to keep track of all the book and customer records .
+ABOUT PROJECT    : Bookshop Management System is a powerful CLI application that helps to keep track of all the book and customer records .
 */
 
 //----------------------------CLASS FOR SHOP---------------------------
